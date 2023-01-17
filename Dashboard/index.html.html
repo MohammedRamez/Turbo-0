@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+       
+    <style>
+        .button:hover{
+            font-size: 25px;
+            width: 150px;
+            height: 800px;
+            border: none;
+            outline: none;
+            background-color: black;
+            color:  #45f3ff;
+            border-radius: 8px;
+            padding: 5px;
+            
+
+        }
+        .button{
+            font-size: 25px;
+            width: 150px;
+            height: 800px;
+            border: none;
+            outline: none;
+            background-color: #45f3ff;
+            color: black;
+            border-radius: 8px;
+            padding: 5px;
+            cursor: pointer;
+            margin-top: 25px; 
+            margin-left: 25px;          
+        }
+        .button:active
+        {
+            opacity: 0.8;
+
+        }
+
+        .div2{
+            width: 205px;
+            background-color: #1c1c1c;
+            margin: 5px;
+            height: 148px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px; 
+            margin-top: -145px;
+        }
+        .div2::before{
+            content: '' ;
+            position: absolute;
+            top: -50%;
+            left:-50%;
+            width: 240px;
+            height: 380px;
+            background:linear-gradient(0deg,transparent,#45f3ff,
+            #45f3ff);
+            transform-origin: bottom right;
+            animation: animatee 3s linear infinite;            
+        }
+        .div2::after{
+            content: '';
+            position: absolute;
+            top: -50%;
+            left:-50%;
+            width: 240px;
+            height: 380px;
+            background:linear-gradient(0deg,transparent,#45f3ff,
+            #45f3ff);
+            transform-origin: bottom right;
+            animation: animatee 3s linear infinite;
+            animation-delay: -3s;            
+        }
+
+
+        
+        .div1{
+            width: 205px;
+            background-color: #1c1c1c;
+            margin: 5px;
+            height: 148px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px;
+            margin-top: -300px;       
+        }
+        .div1::before{
+            content: '' ;
+            position: absolute;
+            top: -50%;
+            left:-50%;
+            width: 240px;
+            height: 380px;
+            background:linear-gradient(0deg,transparent,#45f3ff,
+            #45f3ff);
+            transform-origin: bottom right;
+            animation: animatee 3s linear infinite;            
+        }
+        .div1::after{
+            content: '';
+            position: absolute;
+            top: -50%;
+            left:-50%;
+            width: 240px;
+            height: 380px;
+            background:linear-gradient(0deg,transparent,#45f3ff,
+            #45f3ff);
+            transform-origin: bottom right;
+            animation: animatee 3s linear infinite;
+            animation-delay: -3s;            
+        }
+
+   
+        .row2{
+            display: flex;
+        }
+        .row1{
+            display: flex;
+        }
+
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins',sans-serif;
+        }
+        
+
+        body{
+            
+            min-height: 100vh;
+            background: #23242a;
+        }
+            
+        
+        .box{
+            width: 560px;
+            background-color: #1c1c1c;
+            margin: 10px;
+            height: 520px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px; 
+            margin-top: 175px;    
+                            
+        }
+
+        .box::before{
+        content: '';
+        position: absolute;
+        top: -50%;
+        left:-50% ;
+        width: 400px;
+        height: 570px;
+        background:linear-gradient(0deg,transparent,#45f3ff
+        ,#45f3ff) ;
+        transform-origin: bottom right;
+        animation: animatee 5s linear infinite;
+        z-index: 10;
+        
+    }
+     
+
+        @keyframes animatee
+        {
+            0%
+            {
+                transform: rotate(0deg);
+            }
+            100%
+            {
+                transform: rotate(360deg);
+            }
+        }
+        .from{
+            position:absolute;
+            inset: 3px;
+            border-radius: 10px;
+            background: #28292d;
+            z-index: 10;
+            padding: 40px 90px;           
+            display: flex;
+            flex-direction:column ;	    
+        }
+
+        
+        .inputbox{
+		    position: relative;
+		    width: 300px;
+		    margin-top: 30px;
+            
+        }
+
+        .inputbox input{
+	        position: relative;
+	        width: 210px;
+	        padding: 10px;
+            background: transparent;
+            border: none;
+	        outline: none;
+            color: #23242a;
+            font-size: 1em;
+            letter-spacing: 0.05em; 
+            z-index: 10;          
+        }
+        .inputbox span{
+	        position: absolute;
+	        left: 0;
+	        padding: 10px;
+            font-size: 1em;
+	        color: #8f8f8f;
+            pointer-events: none;
+	        letter-spacing: 0.05em;
+	        transition: 0.5s;
+            
+        }
+        .inputbox input:valid ~ span,
+        .inputbox input:focus ~ span,
+        .inputbox input:valid ~ span
+        {
+            color: #45f3ff;
+            transform: translateX(-10px) translateY(-34px);
+            font-size: 0.75em;
+        }
+
+        .inputbox i
+        {
+	        position: absolute;
+	        left: 0;
+	        bottom: 0;
+	        width: 70%;
+	        height: 2px;
+	        background: #45f3ff;
+	        border-radius: 4px;
+	        transition: 0.5s;
+	        pointer-events: none;
+            z-index: 9;
+        }
+        .inputbox input:valid ~ i,
+        .inputbox input:focus ~ i,
+        .inputbox input:valid ~ i
+        
+        {
+            height: 44px;
+        }
+        
+   
+        .from2{
+            position:absolute;
+            inset: 2px;
+            border-radius: 10px;
+            background: #28292d;
+            z-index: 10;
+            text-align: center;
+            padding-top: 20px;
+            	    
+        }
+        .from3{
+            position:absolute;
+            inset: 2px;
+            border-radius: 10px;
+            background: #28292d;
+            z-index: 10;
+            padding: 30px 40px;		    
+        }
+      
+       .map{
+            width: 900px;
+            background-color: #1c1c1c;
+            margin: 10px;
+            height: 380px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px;
+        }
+        .font{
+            color:#45f3ff;
+            font-size: 18px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .number{
+            color: #45f3ff;
+            font-size: 30px;
+
+        }
+        .coma{
+            color: white;
+        }
+        #map { height: 380px; width: 1500px; }
+
+        .zzz{
+            display: flex;
+        }
+
+        .content{
+
+            position: relative;
+            
+        }
+        .content h2{
+            position: absolute;
+            color:  #23242a; 
+            transform: translate(-50%,-50%);
+            font-size: 5em;
+            margin-left: 200px;
+            margin-top: 53px;
+            letter-spacing: 0.1cm;            
+                      
+        }
+
+        .content h2:nth-child(1)
+        {
+            color: transparent;
+            -webkit-text-stroke: 1px #45f3ff;
+        }
+
+        .content h2:nth-child(2)
+        {
+            color:#45f3ff;
+            animation: animatew 4s ease-in-out infinite ;
+        }
+        @keyframes animatew
+        {
+            0%,100%
+            {
+                clip-path: polygon(0 39%, 17% 41%, 31% 52%, 47% 61%, 69% 66%, 89% 60%, 100% 44%, 100% 100%, 0 100%);
+                
+                   
+
+            }
+            50%
+            {
+                clip-path: polygon(0 53%, 13% 66%, 30% 68%, 51% 64%, 61% 51%, 78% 39%, 100% 37%, 100% 100%, 0 100%);
+                
+
+            }
+        }
+
+
+
+         .contentt{
+
+
+            position: relative;
+            
+        }
+        .contentt h2{
+            position: absolute;
+            color:  #23242a; 
+            transform: translate(-50%,-50%);
+            font-size: 5em;
+            margin-left: 200px;
+            margin-top: 130px;
+            letter-spacing: 0.1cm;            
+                      
+        }
+
+        .contentt h2:nth-child(1)
+        {
+            color: transparent;
+            -webkit-text-stroke: 1px #45f3ff;
+        }
+
+        .contentt h2:nth-child(2)
+        {
+            color:#45f3ff;
+            animation: animateq 4s ease-in-out infinite ;
+        }
+        @keyframes animateq
+        {
+            0%,100%
+            {
+                clip-path: polygon(0 53%, 13% 66%, 30% 68%, 51% 64%, 61% 51%, 78% 39%, 100% 37%, 100% 100%, 0 100%);
+               
+                
+                   
+
+            }
+            50%
+            {
+                clip-path: polygon(0 39%, 17% 41%, 31% 52%, 47% 61%, 69% 66%, 89% 60%, 100% 44%, 100% 100%, 0 100%);
+                
+                
+
+            }
+        }
+      
+    
+  
+      
+     
+            
+            
+        
+            
+        
+        .row{
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div id="map" class="map">
+
+            <div class="from3">
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="content">
+            <h2>INPUT  </h2>
+            <h2>INPUT  </h2>
+            
+        </div>
+
+        <div class="contentt">
+            <h2>HERE  </h2>
+            <h2>HERE </h2>
+            
+        </div>
+          
+      
+
+        
+
+          
+            
+    
+
+    
+       
+        
+
+        <div class="box">
+            <div class="from">
+               
+               
+                <div class="inputbox">
+                    <input type="text" required="required">
+                    <span>Name Of Tower  </span>
+                    <i></i>
+                </div>
+
+                <div class="inputbox">
+                    <input type="number" required="required" >
+                    <span>Apartment Number  </span>
+                    <i></i>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" required="required" >
+                    <span>Floor Name</span>
+                    <i></i>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" required="required" >
+                    <span>Floor Name</span>
+                    <i></i>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" required="required" >
+                    <span>Floor Name</span>
+                    <i></i>
+                </div>
+
+                           
+                <br>
+                <button class="button"><i class="fa-solid fa-user"></i> Login</button>
+
+                
+
+                
+
+
+            </div>
+
+           
+             
+            
+            
+        
+        </div>
+
+      
+
+    </div>
+
+    
+
+    <div class="row1">
+        <div class="div1">
+            <div class="from2">
+                <h2 class="font">Apartment Number</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+                
+
+            </div>
+
+        </div>
+
+        <div class="div1">
+            <div class="from2">
+                <h2 class="font">Floor Number</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+            </div>
+
+        </div>
+
+        <div class="div1">
+            <div class="from2">
+                <h2 class="font">Invoice Cost</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+                
+                
+
+            </div>
+
+        </div>
+
+        <div class="div1">
+            <div class="from2">
+                <h2 class="font">Amount Of Water Withdrawn</h2>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+            </div>
+
+        </div>
+
+        <div class="div1">
+            <div class="from2">
+                <h2 class="font">Number Of Subscribers</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row2">
+        <div class="div2">
+            <div class="from2">
+                <h2 class="font">Number Of Water Meters</h2>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+            </div>
+
+        </div>
+
+        <div class="div2">
+            <div class="from2">
+                <h2 class="font">Number Of Faucets</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+
+            </div>
+
+        </div>
+
+        <div class="div2">
+            <div class="from2">
+                <h2 class="font">Subscription Price</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+            </div>
+
+        </div>
+
+        <div class="div2">
+            <div class="from2">
+                <h2 class="font">Number Of Towers</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+                
+
+
+            </div>
+
+        </div>
+
+        <div class="div2">
+            <div class="from2">
+                <h2 class="font">Number Of Apartments</h2><br>
+                <p class="coma">_ _ _ _ _ _ _ _ _ _ _</p><br>
+                <p class="number">345</p>
+
+
+            </div>
+
+        </div> 
+           
+    </div>
+
+    <script>
+        var map = L.map('map').setView([31.442724, 34.399567], 10);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            var marker = L.marker([51.5, -0.09]).addTo(map);
+
+    </script>
+
+    
+
+    
+
+</body>
+</html>
